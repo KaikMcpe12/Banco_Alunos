@@ -7,7 +7,7 @@
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-como-rodar-na-sua-maquina">Executar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
+  <a href="#licença">Licença</a>
 </p>
 <p align="center">
     <img alt="Static Badge" src="https://img.shields.io/badge/Alunos-red?style=for-the-badge&logo=ghost&logoColor=white&label=Banco&labelColor=black&color=green">
