@@ -15,13 +15,13 @@ class enter(student_bench):
         self.enter.pack()
 
 
-        fundo = Canvas(self.enter, width = 700,height = 500)
-        fundo.pack(fill = "both", expand = True)
+        backg = Canvas(self.enter, width = 700,height = 500)
+        backg.pack(fill = "both", expand = True)
 
-        fundo.create_image(0,0,image = bg_image,anchor = "nw")
-        title = fundo.create_image(87,31, image=title_image, anchor='nw')
+        backg.create_image(0,0,image = bg_image,anchor = "nw")
+        title = backg.create_image(87,31, image=title_image, anchor='nw')
 
-        box = fundo.create_image(87,127,image=box_image,anchor='nw')
+        box = backg.create_image(87,127,image=box_image,anchor='nw')
 
         text_email = Label(self.enter,text='EMAIL:',font=('Inter',12,'bold'),bg='#F2C299').place(x=236,y=169)
         self.entry_email = Entry(self.enter,bd=0)

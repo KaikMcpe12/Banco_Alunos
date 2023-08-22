@@ -2,8 +2,8 @@ from function import *
 
 class action(student_bench):
     def action(self,action):
-        self.str_saldo = StringVar()
-        self.str_saldo.set(super().user_infor[10])
+        self.str_balance = StringVar()
+        self.str_balance.set(super().user_infor[10])
 
         self.str_credit = StringVar()
         self.str_credit.set(super().user_infor[13])
@@ -32,25 +32,25 @@ class action(student_bench):
         self.frame = Frame(super().app,width=700,height=500)
         self.frame.pack()
 
-        fundo = Canvas(self.frame, width = 700,height = 500)
-        fundo.pack(fill = "both", expand = True)
-        fundo.create_image(0,0,image = bg_image,anchor = "nw")
+        backg = Canvas(self.frame, width = 700,height = 500)
+        backg.pack(fill = "both", expand = True)
+        backg.create_image(0,0,image = bg_image,anchor = "nw")
 
-        title = fundo.create_image(13,25, image=title_image, anchor='nw')
+        title = backg.create_image(13,25, image=title_image, anchor='nw')
 
-        box = fundo.create_image(13,104,image=box_image,anchor='nw')
+        box = backg.create_image(13,104,image=box_image,anchor='nw')
 
         blue_box = Label(self.frame,image=blue_box_image,bg=color_box).place(x=25,y=118)
 
 
-        text_saldo = Label(blue_box,text='Saldo:',font=('Inter',-21),bg=color_blue_box).place(x=49,y=142)
-        box_saldo = Label(blue_box,image=real_box_image,bg=color_blue_box).place(x=45,y=169)
-        self.saldo = Label(box_saldo,textvariable=self.str_saldo,fg='#7F7F7F',font=('Inter',-23),bg='#fff')
-        self.saldo.place(x=85,y=176,height=23)
+        text_balance = Label(blue_box,text='Saldo:',font=('Inter',-21),bg=color_blue_box).place(x=49,y=142)
+        box_balance = Label(blue_box,image=real_box_image,bg=color_blue_box).place(x=45,y=169)
+        self.balance = Label(box_balance,textvariable=self.str_balance,fg='#7F7F7F',font=('Inter',-23),bg='#fff')
+        self.balance.place(x=85,y=176,height=23)
 
         text_credit = Label(blue_box,text='Crédito:',font=('Inter',-21),bg=color_blue_box).place(x=432,y=142)
         box_credit = Label(blue_box,image=real_box_image,bg=color_blue_box).place(x=427,y=169)
-        credit = Label(box_saldo,textvariable=self.str_credit,fg='#7F7F7F',font=('Inter',-23),bg='#fff').place(x=467,y=176,height=23)
+        credit = Label(box_balance,textvariable=self.str_credit,fg='#7F7F7F',font=('Inter',-23),bg='#fff').place(x=467,y=176,height=23)
 
         user = Label(self.frame,image=user_image,bg=color_box).place(x=69,y=255)
 
@@ -89,7 +89,7 @@ class action(student_bench):
             messagebox.showinfo(title='Sucesso',message='Deposito sucedido')
 
         student_bench.user_infor = dql(f"SELECT * FROM alunos WHERE cpf = '{super().user_cpf}'")[0]
-        self.str_saldo.set(super().user_infor[10])
+        self.str_balance.set(super().user_infor[10])
 
 
     def go_homepage(self):

@@ -25,41 +25,41 @@ class historic(student_bench):
         self.historic.pack()
 
 
-        fundo = Canvas(self.historic, width = 700,height = 500)
-        fundo.pack(fill = "both", expand = True)
+        backg = Canvas(self.historic, width = 700,height = 500)
+        backg.pack(fill = "both", expand = True)
 
-        fundo.create_image(0,0,image = bg_image,anchor = "nw")
-        title = fundo.create_image(14,25, image=title_image, anchor='nw')
+        backg.create_image(0,0,image = bg_image,anchor = "nw")
+        title = backg.create_image(14,25, image=title_image, anchor='nw')
 
-        box = fundo.create_image(14,87,image=box_image,anchor='nw')
+        box = backg.create_image(14,87,image=box_image,anchor='nw')
 
         if type == 'withdraw':
             bill_btn = Button(self.historic,image=bill_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('bill')).place(x=70,y=101)
             transfer_btn = Button(self.historic,image=transfer_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('transfer')).place(x=301,y=101)
             deposit_btn = Button(self.historic,image=deposit_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('deposit')).place(x=532,y=101)
             
-            data_historic = dql(f"SELECT a.nome,valor,data FROM historico AS h JOIN alunos AS a ON remetente_cpf = cpf WHERE ação = 'Saque' AND cpf = '{super().user_cpf}'")
+            data_historic = dql(f"SELECT a.nome,valor,data FROM historico AS h JOIN alunos AS a ON remetente_cpf = cpf WHERE ação = 'Saque' AND cpf = '{super().user_cpf}' ORDER BY data DESC")
         
         elif type == 'deposit':
             bill_btn = Button(self.historic,image=bill_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('bill')).place(x=70,y=101)
             transfer_btn = Button(self.historic,image=transfer_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('transfer')).place(x=301,y=101)
             withdraw_btn = Button(self.historic,image=withdraw_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('withdraw')).place(x=532,y=101)
             
-            data_historic = dql(f"SELECT a.nome,valor,data FROM historico AS h JOIN alunos AS a ON remetente_cpf = cpf WHERE ação = 'Deposito' AND cpf = '{super().user_cpf}'")
+            data_historic = dql(f"SELECT a.nome,valor,data FROM historico AS h JOIN alunos AS a ON remetente_cpf = cpf WHERE ação = 'Deposito' AND cpf = '{super().user_cpf}' ORDER BY data DESC")
         
         elif type == 'bill':
             deposit_btn = Button(self.historic,image=deposit_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('deposit')).place(x=70,y=101)            
             transfer_btn = Button(self.historic,image=transfer_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('transfer')).place(x=301,y=101)
             withdraw_btn = Button(self.historic,image=withdraw_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('withdraw')).place(x=532,y=101)
             
-            data_historic = dql(f"SELECT a.nome,valor,data FROM historico AS h JOIN alunos AS a ON remetente_cpf = cpf WHERE ação = 'Fatura' AND cpf = '{super().user_cpf}'")
+            data_historic = dql(f"SELECT a.nome,valor,data FROM historico AS h JOIN alunos AS a ON remetente_cpf = cpf WHERE ação = 'Fatura' AND cpf = '{super().user_cpf}' ORDER BY data DESC")
 
         else:
             deposit_btn = Button(self.historic,image=deposit_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('deposit')).place(x=70,y=101)            
             bill_btn = Button(self.historic,image=bill_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('bill')).place(x=301,y=101)
             withdraw_btn = Button(self.historic,image=withdraw_btn_image,bd=0,bg=color_box,activebackground=color_box,command=lambda:self.go_historic('withdraw')).place(x=532,y=101)
             
-            data_historic = dql(f"SELECT remetente.nome AS remetente, historico.valor, destinatario.nome AS destinatario, historico.data,historico.tipo_pg FROM historico JOIN alunos AS remetente ON historico.remetente_cpf = remetente.cpf JOIN alunos AS destinatario ON historico.destinatario_cpf = destinatario.cpf WHERE historico.remetente_cpf = '{super().user_cpf}' OR historico.destinatario_cpf = '{super().user_cpf}'")
+            data_historic = dql(f"SELECT remetente.nome AS remetente, historico.valor, destinatario.nome AS destinatario, historico.data,historico.tipo_pg FROM historico JOIN alunos AS remetente ON historico.remetente_cpf = remetente.cpf JOIN alunos AS destinatario ON historico.destinatario_cpf = destinatario.cpf WHERE historico.remetente_cpf = '{super().user_cpf}' OR historico.destinatario_cpf = '{super().user_cpf}' ORDER BY historico.data DESC")
 
         if type == 'withdraw' or type == 'deposit' or type == 'bill':
             self.tree = ttk.Treeview(self.historic,columns=('Nome','Valor','Data'),show='headings')
@@ -137,9 +137,9 @@ class historic(student_bench):
         wdb = ['withdraw','deposit','bill']
         if type in wdb:
             translate_type = ['Saque','Deposito','Fatura'][wdb.index(type)]
-            linhas = dql(f"SELECT a.nome,valor,data FROM historico AS h JOIN alunos AS a ON remetente_cpf = cpf WHERE ação = '{translate_type}' AND cpf = '{super().user_cpf}' AND data LIKE '%{day}%/%{moth}%/%{year}%'")
+            linhas = dql(f"SELECT a.nome,valor,data FROM historico AS h JOIN alunos AS a ON remetente_cpf = cpf WHERE ação = '{translate_type}' AND cpf = '{super().user_cpf}' AND data LIKE '%{day}%/%{moth}%/%{year}%' ORDER BY data DESC")
         else:
-            linhas = dql(f"SELECT remetente.nome AS remetente, historico.valor, destinatario.nome AS destinatario, historico.data,historico.tipo_pg FROM historico JOIN alunos AS remetente ON historico.remetente_cpf = remetente.cpf JOIN alunos AS destinatario ON historico.destinatario_cpf = destinatario.cpf WHERE historico.data LIKE '%{day}%/%{moth}%/%{year}%' AND (historico.remetente_cpf = '{super().user_cpf}' OR historico.destinatario_cpf = '{super().user_cpf}')")
+            linhas = dql(f"SELECT remetente.nome AS remetente, historico.valor, destinatario.nome AS destinatario, historico.data,historico.tipo_pg FROM historico JOIN alunos AS remetente ON historico.remetente_cpf = remetente.cpf JOIN alunos AS destinatario ON historico.destinatario_cpf = destinatario.cpf WHERE historico.data LIKE '%{day}%/%{moth}%/%{year}%' AND (historico.remetente_cpf = '{super().user_cpf}' OR historico.destinatario_cpf = '{super().user_cpf}') ORDER BY historico.data DESC")
         
         for i,data in enumerate(linhas):
             if i % 2 == 0:

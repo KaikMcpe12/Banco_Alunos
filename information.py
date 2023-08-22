@@ -71,7 +71,7 @@ class information(student_bench):
         txt_list_pages_inf = '• Pagina inicial: que ficará responsável pela primeira interação com o usuario\n• Página de cadatros: para inserir os dados de um usuario iniciante\n• Página entrar: para um usuario já cadastrado\n• Home: a primeira tela após entrar com uma conta ou cadastrar\n• Perfil: para o usuario ver suas informações\n• Página de depósito,saque, transferência e pagamento: para realizar ações da conta\n• Lista de cadastros: lista de pessoas cadastradas'
         txt_subtitle2_inf = 'Nota:'
         txt2_inf = 'Poderia ser usado o Custom TKiter que é uma versão avançaçado do que o próprio\nTKinter, mas optei por usar o classico TKinter, por isso o uso excessivo de images'
-        txt_author_inf = 'Autor: Francisco Kaik\nData: ?/07/2023'
+        txt_author_inf = 'Autor: Francisco Kaik\nData: 21/08/2023'
 
         txt_box_inf = Label(inf,text=txt1_inf,justify='left',bg=color_box,font=text_fontN).grid(row=0,column=0,pady=(5,0))
         subtitle_box_inf = Label(inf,text=txt_subtitle_inf,justify='left',bg=color_box,font=text_fontB).grid(row=1,column=0,pady=(5,0),sticky='w')

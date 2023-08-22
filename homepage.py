@@ -34,13 +34,13 @@ class homepage(student_bench):
         self.homepage = Frame(super().app,width=700,height=500)
         self.homepage.pack()
 
-        fundo = Canvas(self.homepage, width = 700,height = 500)
-        fundo.pack(fill = "both", expand = True)
+        backg = Canvas(self.homepage, width = 700,height = 500)
+        backg.pack(fill = "both", expand = True)
 
-        fundo.create_image(0,0,image = bg_image,anchor = "nw")
-        title = fundo.create_image(12,12, image=title_image, anchor='nw')
+        backg.create_image(0,0,image = bg_image,anchor = "nw")
+        title = backg.create_image(12,12, image=title_image, anchor='nw')
 
-        box = fundo.create_image(12,78,image=box_image,anchor='nw')
+        box = backg.create_image(12,78,image=box_image,anchor='nw')
 
         back_btn = Button(self.homepage,background=color_box,activebackground=color_box,bd=0,image=back_btn_image,command=self.close_account).place(x=31,y=19)
 
@@ -54,13 +54,13 @@ class homepage(student_bench):
 
         card.bind("<Button-1>", self.go_profile)
 
-        text_saldo = Label(blue_box,text='Saldo:',font=('Inter',-21),bg=color_blue_box).place(x=410,y=140)
-        box_saldo = Label(blue_box,image=real_box_image,bg=color_blue_box).place(x=406,y=167)
-        saldo = Label(box_saldo,text=super().user_infor[10],fg='#7F7F7F',font=('Inter',-23),bg='#fff').place(x=446,y=174,height=23)
+        text_balance = Label(blue_box,text='Saldo:',font=('Inter',-21),bg=color_blue_box).place(x=410,y=140)
+        box_balance = Label(blue_box,image=real_box_image,bg=color_blue_box).place(x=406,y=167)
+        balance = Label(box_balance,text=super().user_infor[10],fg='#7F7F7F',font=('Inter',-23),bg='#fff').place(x=446,y=174,height=23)
 
         text_credit = Label(blue_box,text='Crédito:',font=('Inter',-21),bg=color_blue_box).place(x=410,y=222)
         box_credit = Label(blue_box,text='',image=real_box_image,bg=color_blue_box).place(x=406,y=249)
-        credit = Label(box_saldo,text=super().user_infor[13],fg='#7F7F7F',font=('Inter',-23),bg='#fff').place(x=446,y=256,height=23)
+        credit = Label(box_balance,text=super().user_infor[13],fg='#7F7F7F',font=('Inter',-23),bg='#fff').place(x=446,y=256,height=23)
         text_limit = Label(blue_box,text=f'Limite: R$ {super().user_infor[12]}',font=('Inter',-12),bg=color_blue_box).place(x=410,y=287)
 
         withdraw_btn = Button(self.homepage,image=withdraw_btn_image,bd=0,bg=color_box,activebackground=color_box,command=self.go_withdraw).place(x=31,y=328)

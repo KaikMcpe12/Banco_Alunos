@@ -3,8 +3,8 @@ from function import *
 class transfer(student_bench):
     def transfer(self):
 
-        self.str_saldo = StringVar()
-        self.str_saldo.set(super().user_infor[10])
+        self.str_balance = StringVar()
+        self.str_balance.set(super().user_infor[10])
 
         self.str_credit = StringVar()
         self.str_credit.set(super().user_infor[13])
@@ -37,21 +37,21 @@ class transfer(student_bench):
         self.transfer.pack()
 
 
-        fundo = Canvas(self.transfer, width = 700,height = 500)
-        fundo.pack(fill = "both", expand = True)
+        backg = Canvas(self.transfer, width = 700,height = 500)
+        backg.pack(fill = "both", expand = True)
 
-        fundo.create_image(0,0,image = bg_image,anchor = "nw")
-        title = fundo.create_image(13,25, image=title_image, anchor='nw')
+        backg.create_image(0,0,image = bg_image,anchor = "nw")
+        title = backg.create_image(13,25, image=title_image, anchor='nw')
 
-        box = fundo.create_image(13,87,image=box_image,anchor='nw')
+        box = backg.create_image(13,87,image=box_image,anchor='nw')
 
 
         blue_box = Label(self.transfer,image=blue_box_image,bg=color_box).place(x=25,y=101)
 
-        text_saldo = Label(blue_box,text='Saldo:',bg=color_blue_box,font=('Inter',-21)).place(x=49,y=125)
-        box_saldo = Label(blue_box,image=real_box_image,bg=color_blue_box).place(x=45,y=152)
-        self.saldo = Label(box_saldo,textvariable=self.str_saldo,fg='#7F7F7F',font=('Inter',-23),bg='#fff')
-        self.saldo.place(x=85,y=159,height=23)
+        text_balance = Label(blue_box,text='Saldo:',bg=color_blue_box,font=('Inter',-21)).place(x=49,y=125)
+        box_balance = Label(blue_box,image=real_box_image,bg=color_blue_box).place(x=45,y=152)
+        self.balance = Label(box_balance,textvariable=self.str_balance,fg='#7F7F7F',font=('Inter',-23),bg='#fff')
+        self.balance.place(x=85,y=159,height=23)
 
         text_credit = Label(blue_box,text='Crédito:',bg=color_blue_box,font=('Inter',-21)).place(x=432,y=125)
         box_credit = Label(blue_box,image=real_box_image,bg=color_blue_box).place(x=427,y=152)
@@ -115,8 +115,8 @@ class transfer(student_bench):
 
 
     def transfer_money(self):
-        dados = dql(f"SELECT * FROM alunos WHERE n_cartão = '{self.entry_adress.get()}'")
-        if not self.sp_value.get().isdigit() or not round(int(self.sp_value.get()),2) or not self.cb_plots.get().isdigit() or self.entry_adress.get()== '' or not dados: #Verifica se valor digitado é número e se o mesmo possui duas cassas decimais, verifica se o campo de parcela é número e se o campo de número de cartão não está vazio
+        data = dql(f"SELECT * FROM alunos WHERE n_cartão = '{self.entry_adress.get()}'")
+        if not self.sp_value.get().isdigit() or not round(int(self.sp_value.get()),2) or not self.cb_plots.get().isdigit() or self.entry_adress.get()== '' or not data: #Verifica se valor digitado é número e se o mesmo possui duas cassas decimais, verifica se o campo de parcela é número e se o campo de número de cartão não está vazio
             messagebox.showerror(title='Erro',message='Preecha os dados corretamente')
             return
         
@@ -126,17 +126,17 @@ class transfer(student_bench):
 
         if self.type_value.get() == 0 and int(self.sp_value.get()) <= super().user_infor[10]:
             dml(f"UPDATE alunos SET saldo = saldo-'{self.sp_value.get()}' WHERE cpf = '{super().user_cpf}'")
-            dml(f"INSERT INTO historico(ação,remetente_cpf,valor,destinatario_cpf,data,tipo_pg) VALUES ('Transferência','{super().user_cpf}','{self.sp_value.get()}','{dados[0][1]}','{date_formated}','Débito')")
+            dml(f"INSERT INTO historico(ação,remetente_cpf,valor,destinatario_cpf,data,tipo_pg) VALUES ('Transferência','{super().user_cpf}','{self.sp_value.get()}','{data[0][1]}','{date_formated}','Débito')")
             
             student_bench.user_infor = dql(f"SELECT * FROM alunos WHERE cpf = '{super().user_cpf}'")[0]
-            self.str_saldo.set(super().user_infor[10])
+            self.str_balance.set(super().user_infor[10])
 
             messagebox.showinfo(title='Sucesso',message='Transferência por débito bem sucedida')
 
         elif self.type_value.get() == 1 and int(self.sp_value.get()) <= super().user_infor[13]: #Se o valor digitado é menor do que os créditos
             new_card_limit = round(int(self.sp_value.get()) * 1.05,2)
             dml(f"UPDATE alunos SET v_crédito = v_crédito-'{self.sp_value.get()}',limite_cartão = limite_cartão+'{new_card_limit}'  WHERE cpf = '{super().user_cpf}'")
-            dml(f"INSERT INTO historico(ação,remetente_cpf,valor,destinatario_cpf,data,tipo_pg) VALUES ('Transferência','{super().user_cpf}','{self.sp_value.get()}','{dados[0][1]}','{date_formated}','Crédito')")
+            dml(f"INSERT INTO historico(ação,remetente_cpf,valor,destinatario_cpf,data,tipo_pg) VALUES ('Transferência','{super().user_cpf}','{self.sp_value.get()}','{data[0][1]}','{date_formated}','Crédito')")
             valor = round(int(self.sp_value.get())*1.05,2)
             v_parcela = round(valor/int(self.cb_plots.get()),2)
             dml(f"INSERT INTO h_fatura(cartão_user,valor,montante,parcelas,v_parcela,data,data_atualização) VALUES ('{super().user_infor[11]}','{valor}','{valor}','{self.cb_plots.get()}','{v_parcela}','{date_formated}','{date_formated}')")

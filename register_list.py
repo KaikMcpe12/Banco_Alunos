@@ -24,13 +24,13 @@ class register_list(student_bench):
         self.regs_list_f = Frame(super().app,width=700,height=500)
         self.regs_list_f.pack()
 
-        fundo = Canvas(self.regs_list_f, width = 700,height = 500)
-        fundo.pack(fill = "both", expand = True)
+        backg = Canvas(self.regs_list_f, width = 700,height = 500)
+        backg.pack(fill = "both", expand = True)
 
-        fundo.create_image(0,0,image = bg_image,anchor = "nw")
-        title = fundo.create_image(14,25, image=title_image, anchor='nw')
+        backg.create_image(0,0,image = bg_image,anchor = "nw")
+        title = backg.create_image(14,25, image=title_image, anchor='nw')
 
-        box = fundo.create_image(14,87,image=box_image,anchor='nw')
+        box = backg.create_image(14,87,image=box_image,anchor='nw')
 
         name_rect = Label(self.regs_list_f,image=name_rect_image,bg=color_box).place(x=26,y=97)
         user = Label(name_rect,image=user_b_image,bg='#fff').place(x=52,y=100)

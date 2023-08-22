@@ -35,13 +35,13 @@ class bill(student_bench):
         self.bill_f = Frame(super().app,width=700,height=500)
         self.bill_f.pack()
 
-        fundo = Canvas(self.bill_f, width = 700,height = 500)
-        fundo.pack(fill = "both", expand = True)
+        backg = Canvas(self.bill_f, width = 700,height = 500)
+        backg.pack(fill = "both", expand = True)
 
-        fundo.create_image(0,0,image = bg_image,anchor = "nw")
-        title = fundo.create_image(14,25, image=title_image, anchor='nw')
+        backg.create_image(0,0,image = bg_image,anchor = "nw")
+        title = backg.create_image(14,25, image=title_image, anchor='nw')
 
-        box = fundo.create_image(14,87,image=box_image,anchor='nw')
+        box = backg.create_image(14,87,image=box_image,anchor='nw')
 
         self.previous_btn = Button(self.bill_f,image=self.previous_btn_image,bg=color_box,activebackground=color_box,bd=0)
         self.previous_btn.place(x=24,y=236)

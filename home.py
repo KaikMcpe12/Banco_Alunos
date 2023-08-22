@@ -14,11 +14,11 @@ class home(student_bench):
         self.home.pack()
 
 
-        self.fundo = Canvas(self.home, width = 700,height = 500)
-        self.fundo.pack(fill = "both", expand = True) 
+        self.backg = Canvas(self.home, width = 700,height = 500)
+        self.backg.pack(fill = "both", expand = True) 
 
-        self.fundo.create_image(0,0,image = bg_image,anchor = "nw")
-        self.title = self.fundo.create_image(87,40, image=title_image, anchor='nw')
+        self.backg.create_image(0,0,image = bg_image,anchor = "nw")
+        self.title = self.backg.create_image(87,40, image=title_image, anchor='nw')
 
 
         self.enter_btn = Button(self.home,image=enter_btn_image,bg='#6BA5F2',activebackground='#6BA5F2',bd=0,command=self.go_enter).place(x=269,y=228)

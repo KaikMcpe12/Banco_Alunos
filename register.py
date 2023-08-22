@@ -18,13 +18,13 @@ class register(student_bench):
         self.register = Frame(self.app,width=700,height=500)
         self.register.pack()
         
-        fundo = Canvas(self.register, width = 700,height = 500)
-        fundo.pack(fill = "both", expand = True)
+        backg = Canvas(self.register, width = 700,height = 500)
+        backg.pack(fill = "both", expand = True)
 
-        fundo.create_image(0,0,image = bg_image,anchor = "nw")
-        title = fundo.create_image(87,17, image=title_image, anchor='nw')
+        backg.create_image(0,0,image = bg_image,anchor = "nw")
+        title = backg.create_image(87,17, image=title_image, anchor='nw')
 
-        box = fundo.create_image(87,100,image=box_image,anchor='nw')
+        box = backg.create_image(87,100,image=box_image,anchor='nw')
 
 
         text_name = Label(self.register,text='Nome completo:',font=('Inter',12,'bold'),bg='#F2C299').place(x=102,y=129)

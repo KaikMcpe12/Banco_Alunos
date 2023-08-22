@@ -12,6 +12,7 @@ class student_bench:
     app.title('Banco Alunos')
     app.geometry('700x500')
     app.resizable(width=False,height=False)
+    app.iconphoto(True,PhotoImage(file=folderAssets+'\\logo.png'))
 
 
     user_infor = None
